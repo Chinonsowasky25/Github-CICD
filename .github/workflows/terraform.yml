@@ -1,28 +1,22 @@
-name: Terraform Deploy
+name: Terraform & Deploy
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  terraform:
+  setup:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v3
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.4.6
-
-      - name: Initialize Terraform
-        run: terraform init
-
-      - name: Plan Terraform
-        run: terraform plan
-
-      - name: Apply Terraform
-        run: terraform apply -auto-approve
